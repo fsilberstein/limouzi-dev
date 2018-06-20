@@ -9,6 +9,8 @@ build:
 test-unit:
 	go test -v ./...
 
+.PHONY: docker
 docker:
+	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && \
 	docker build --no-cache -t $(BASEREPO)/$(IMAGE):latest . && \
 	docker push $(BASEREPO)/$(IMAGE):latest
